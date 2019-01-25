@@ -86,7 +86,7 @@ func killPid(uuid string) {
 	player, ok := pidMap.Load(uuid)
 	_player := player.(Player)
 	if ok {
-		err := syscall.Kill(_player.pid, syscall.SIGKILL)
+		err := syscall.Kill(-_player.pid, syscall.SIGKILL)
 		if err != nil {
 			log.Println("kill subprocess fail", err)
 		} else {
@@ -102,7 +102,8 @@ func killPid(uuid string) {
 func exeShell(uuid string, rtsp string, rtmp string) {
 	script := shellPath + " '" + rtsp + "' '" + rtmp + "'"
 	cmd := exec.Command("/bin/sh", "-c", script)
-
+        cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
+	
 	if err := cmd.Start(); err != nil {
 		log.Println(err.Error())
 	}
