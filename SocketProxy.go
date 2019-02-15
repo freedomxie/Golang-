@@ -213,7 +213,7 @@ func revice(tc *net.Conn, uc *net.Conn) {
 func loadConfig() (string, string, string) {
 	var ip string
 	var port string
-	var proxyType string
+6	var proxyType string
 
 	f, err := os.Open("./proxy.ini")
 	if err != nil {
@@ -265,3 +265,17 @@ func main() {
 	start(ip, port, proxyType)
 
 }
+
+/*
+#proxy.ini
+#load balancing server ip and port config
+ip=0.0.0.0
+port=9527
+#ipHash,random
+proxyType=random
+#proxy server config
+127.0.0.1:7070
+127.0.0.1:9090
+127.0.0.1:8080
+#proxy config end
+*/
