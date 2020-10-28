@@ -188,7 +188,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 func uploadHandler(w http.ResponseWriter, r *http.Request) {
 
-	//body, _ := ioutil.ReadAll(r.Body) //把  body 内容读入字符串 s
+	//body, _ := ioutil.ReadAll(r.Body) //把  body 内容读入字符串 
 	nowtime := time.Now()
 	switch r.Method {
 	case "POST":
@@ -254,3 +254,15 @@ func main() {
 		log.Fatal("ListenAndServe: ", err.Error())
 	}
 }
+//config.ini
+'''
+port=8080
+filePath=/Users/upload
+path=/Users/web/html
+ssl=true
+crt=/Users/xiedong/work/code/secure/xx.crt
+key=/Users/xiedong/work/code/secure/xx.key
+/api=http://111.229.33.8:8084
+/upload=http://111.229.33.8:8084
+#end
+'''
